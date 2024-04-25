@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/Flexi_Biller_Back.props" />
+</Project>

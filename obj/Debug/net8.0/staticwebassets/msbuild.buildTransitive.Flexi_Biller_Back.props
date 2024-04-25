@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/Flexi_Biller_Back.props" />
+</Project>
