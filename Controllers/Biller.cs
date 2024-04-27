@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using Flexi_Biller_Back.Data;
 using Flexi_Biller_Back.Models;
@@ -150,7 +152,8 @@ else
 
 //Send the Invoice if DaysLeft is 14 and Invoice sent is "0"
 if(theDaysLeft<15 && s.IsInvoiceSent=="0"){
-//SendInvoice(instName, companyEmail, );
+   string endDate = s.EndDate?.ToString("dd MMMM, yyyy") ?? "N/A";
+  await SendInvoice(s.CompanyEmail, s.InstituitionName, endDate);
 s.IsInvoiceSent = "1";
 }
 
@@ -167,6 +170,51 @@ return Ok(s);
 }
 
 
+
+private async Task SendInvoice(string email, string companyName, string endDate)
+{
+    // Construct the email body with the invoice details
+    string body = $@"
+        <p>Dear {companyName},</p>
+        <p>Please find attached the invoice for the services provided.</p>
+        <p>Invoice Details:</p>
+        <ul>
+            <li>Company Name: {companyName}</li>
+            <li>End Date: {endDate}</li>
+            <!-- Add more invoice details here as needed -->
+        </ul>
+        <p>If you have any questions or concerns, please don't hesitate to contact us.</p>
+        <p>Thank you for your business!</p>
+        <p>Best Regards,<br>Glydetek Group Limited</p>";
+
+    // Email subject
+    string subject = "Invoice for Services Rendered";
+
+    // Use the current date for the email
+    string theDate = DateTime.Today.ToString("dd MMMM, yyyy");
+
+    // Create an instance of EmailRequest
+    EmailRequest mail = new EmailRequest();
+
+    // Send the email using SMTP
+    using (SmtpClient smtpClient = new SmtpClient(mail.SmtpHost, mail.SmtpPort))
+    {
+        smtpClient.EnableSsl = true;
+        smtpClient.UseDefaultCredentials = false;
+        smtpClient.Credentials = new NetworkCredential(mail.SmtpUserName, mail.SmtpPassword);
+
+        // Create a MailMessage instance
+        MailMessage mailMessage = new MailMessage();
+        mailMessage.From = new MailAddress(mail.SmtpUserName);
+        mailMessage.To.Add(email);
+        mailMessage.Subject = subject;
+        mailMessage.Body = body;
+        mailMessage.IsBodyHtml = true; // Set the email body format to HTML
+
+        // Send the email asynchronously
+        await smtpClient.SendMailAsync(mailMessage);
+    }
+}
 
 
 
