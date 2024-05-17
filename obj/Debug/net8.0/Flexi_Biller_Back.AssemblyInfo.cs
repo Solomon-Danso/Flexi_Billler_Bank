@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Flexi_Biller_Back")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d1b7b8609135adae3f2eabeb0131af49f2cc6c9a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+541ff29082bed21588686f49d403c1a4a0d83f1d")]
 [assembly: System.Reflection.AssemblyProductAttribute("Flexi_Biller_Back")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Flexi_Biller_Back")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -137,10 +137,6 @@
 /Users/glydetek/Desktop/WIP/FlexiBiller/Flexi_Billler_Back/bin/Debug/net8.0/appsettings.Development.json
 /Users/glydetek/Desktop/WIP/FlexiBiller/Flexi_Billler_Back/bin/Debug/net8.0/appsettings.json
 /Users/glydetek/Desktop/WIP/FlexiBiller/Flexi_Billler_Back/bin/Debug/net8.0/Flexi_Biller_Back
-/Users/glydetek/Desktop/WIP/FlexiBiller/Flexi_Billler_Back/bin/Debug/net8.0/Flexi_Biller_Back.deps.json
-/Users/glydetek/Desktop/WIP/FlexiBiller/Flexi_Billler_Back/bin/Debug/net8.0/Flexi_Biller_Back.runtimeconfig.json
-/Users/glydetek/Desktop/WIP/FlexiBiller/Flexi_Billler_Back/bin/Debug/net8.0/Flexi_Biller_Back.dll
-/Users/glydetek/Desktop/WIP/FlexiBiller/Flexi_Billler_Back/bin/Debug/net8.0/Flexi_Biller_Back.pdb
 /Users/glydetek/Desktop/WIP/FlexiBiller/Flexi_Billler_Back/bin/Debug/net8.0/Azure.Core.dll
 /Users/glydetek/Desktop/WIP/FlexiBiller/Flexi_Billler_Back/bin/Debug/net8.0/Azure.Identity.dll
 /Users/glydetek/Desktop/WIP/FlexiBiller/Flexi_Billler_Back/bin/Debug/net8.0/Humanizer.dll
@@ -269,5 +265,9 @@
 /Users/glydetek/Desktop/WIP/FlexiBiller/Flexi_Billler_Back/obj/Debug/net8.0/Flexi_Biller_Back.dll
 /Users/glydetek/Desktop/WIP/FlexiBiller/Flexi_Billler_Back/obj/Debug/net8.0/refint/Flexi_Biller_Back.dll
 /Users/glydetek/Desktop/WIP/FlexiBiller/Flexi_Billler_Back/obj/Debug/net8.0/Flexi_Biller_Back.pdb
+/Users/glydetek/Desktop/WIP/FlexiBiller/Flexi_Billler_Back/bin/Debug/net8.0/Flexi_Biller_Back.deps.json
+/Users/glydetek/Desktop/WIP/FlexiBiller/Flexi_Billler_Back/bin/Debug/net8.0/Flexi_Biller_Back.runtimeconfig.json
+/Users/glydetek/Desktop/WIP/FlexiBiller/Flexi_Billler_Back/bin/Debug/net8.0/Flexi_Biller_Back.dll
+/Users/glydetek/Desktop/WIP/FlexiBiller/Flexi_Billler_Back/bin/Debug/net8.0/Flexi_Biller_Back.pdb
 /Users/glydetek/Desktop/WIP/FlexiBiller/Flexi_Billler_Back/obj/Debug/net8.0/Flexi_Biller_Back.genruntimeconfig.cache
 /Users/glydetek/Desktop/WIP/FlexiBiller/Flexi_Billler_Back/obj/Debug/net8.0/ref/Flexi_Biller_Back.dll
