@@ -231,7 +231,7 @@ return Ok(s);
 
 private async Task SendInvoice(string email, string companyName, DateTime endDate)
 {
-     //string endDate = TheEndDate.ToString("dd MMMM, yyyy") ?? "N/A";
+    
     // Construct the email body with the invoice details
     string body = $@"
     
@@ -333,7 +333,7 @@ private async Task SendInvoice(string email, string companyName, DateTime endDat
                 </p> 
 
                   <p style='font-size: 16px; color: grey; font-weight: 300;'>
-                  Please be noted that your subscription will expire on {endDate} 
+                  Please be noted that your subscription will expire on <b>{endDate}</b> 
                   </p>
                 <p style='font-size: 12px; color: grey; font-weight: 300; padding: 20px; text-align: center; color: black; font-size: 24px; background-color: #eae2b7; font-weight: bolder;'>
                     Kindly contact our Financial team to renew your subscription
