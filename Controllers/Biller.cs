@@ -113,8 +113,7 @@ return Ok(s);
 
 
 
-[HttpPost("AddToBillTableAddToAddToBil$lTableBillTableAddTo$%AddToBillTDFHVableBillTable")]
-public async Task<IActionResult> AddToBillTable(string InstituitionName, string ShortName, DateTime StartDate, DateTime EndDate, string CompanyEmail)
+private async Task<IActionResult> AddToBillTable(string InstituitionName, string ShortName, DateTime StartDate, DateTime EndDate, string CompanyEmail)
 {
     var addBTable = new InstituitionBillingTable
     {
@@ -208,8 +207,9 @@ else
 
 //Send the Invoice if DaysLeft is 14 and Invoice sent is "0"
 if(theDaysLeft<15 && s.IsInvoiceSent=="0"){
-   string endDate = s.EndDate?.ToString("dd MMMM, yyyy") ?? "N/A";
-   
+  // string endDate = s.EndDate?.ToString("dd MMMM, yyyy") ?? "N/A";
+   DateTime endDate = s.EndDate.Value;
+
       await SendInvoice(s.CompanyEmail, s.InstituitionName, endDate);
 s.IsInvoiceSent = "1";
  
@@ -229,8 +229,9 @@ return Ok(s);
 
 
 
-private async Task SendInvoice(string email, string companyName, string endDate)
+private async Task SendInvoice(string email, string companyName, DateTime endDate)
 {
+     //string endDate = TheEndDate.ToString("dd MMMM, yyyy") ?? "N/A";
     // Construct the email body with the invoice details
     string body = $@"
     
