@@ -22,7 +22,6 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 {
 base.OnConfiguring(optionsBuilder); optionsBuilder.UseSqlServer("Server=localhost,1433;Database=FlexiBiller;User=sa;Password=HydotTech;TrustServerCertificate=true;");
 }
-
 //Data Set, where Project and User are models in the Model folder
 
 public DbSet<InstituitionBillingTable> BillingTable => Set<InstituitionBillingTable>(); 

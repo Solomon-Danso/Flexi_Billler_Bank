@@ -51,13 +51,15 @@ return Ok(person);
 }
 
 
+
 [HttpPost("PaymentHistory")]
-public async Task<IActionResult> PaymentHistory([FromForm] PaymentHistory p)
+public async Task<IActionResult> PaymentHistory([FromBody] PaymentHistory p)
 {
     if (!p.StartDate.HasValue || !p.EndDate.HasValue)
     {
         return BadRequest("StartDate and EndDate are required.");
     }
+
 
     if (p.ShortName==null || p.InstituitionName==null || p.CompanyEmail==null)
     {
@@ -102,8 +104,10 @@ public async Task<IActionResult> PaymentHistory([FromForm] PaymentHistory p)
     {
         return BadRequest(e);
     }
-
-    return Ok($"{pay.InstituitionName} payment transaction added successfully");
+var final = new {
+    message = $"{pay.InstituitionName} payment transaction added successfully"
+};
+    return Ok(final);
 }
 
 
@@ -195,7 +199,7 @@ public async Task<IActionResult> ViewBillInst(string ShortName){
 
 var s = context.BillingTable.FirstOrDefault(a=>a.ShortName == ShortName);
 if (s==null){
-    return BadRequest(new { key = "error", message = "Instituition not found", errorCode = 400 });
+    return BadRequest(new { key = "error", message = ShortName+" not found in the billing list", errorCode = 400 });
 }
 var theDaysLeft = 0;
 
@@ -205,10 +209,12 @@ if (s.EndDate.HasValue)
         TimeSpan timeDifference = s.EndDate.Value - DateTime.Today;
         s.DaysLeft = (int)timeDifference.TotalDays;
         theDaysLeft = (int)timeDifference.TotalDays;
+        await context.SaveChangesAsync();
     }
 else
     {
      s.DaysLeft = 0;
+     await context.SaveChangesAsync();
     }
 
 
@@ -220,21 +226,21 @@ if(theDaysLeft<15 && s.IsInvoiceSent=="0"){
 
     await SendInvoice(s.CompanyEmail, s.InstituitionName, endDate);
     s.IsInvoiceSent = "1";
- 
+ await context.SaveChangesAsync();
 }
 
 
 //If Days left is less than 1, set accessDenied to "true" 
 if(theDaysLeft<1){
     s.AccessDenied = "true";
+    await context.SaveChangesAsync();
 }
 
 
 
-await context.SaveChangesAsync();
+
 return Ok(s);
 }
-
 
 
 private async Task SendInvoice(string email, string companyName, DateTime endDate)
