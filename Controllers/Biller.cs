@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
-using Flexi_Biller_Back.Data;
 using Flexi_Biller_Back.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -15,40 +14,10 @@ namespace Flexi_Biller_Back.Controllers
     [Route("api/[controller]")]
     public class Biller : ControllerBase
     {
-        private readonly DataContext context;
-        public Biller(DataContext ctx){
+        private readonly ExtServiceContext context;
+        public Biller(ExtServiceContext ctx){
             context = ctx;
         }
-
-[HttpPost("AddUser")]
-public async Task<IActionResult> AddUser([FromForm]Authenticate u){
-
-var user = new Authenticate{
-    Username = u.Username,
-    Password = u.Password,
-    ShortName = u.ShortName
-};
-
-context.Auth.Add(user);
-await context.SaveChangesAsync();
-
-return Ok("User added successfully");
-
-}
-
-
-[HttpPost("Login")]
-public async Task<IActionResult> Login([FromForm]Authenticate u){
-
-var person = context.Auth.FirstOrDefault(a=>a.Username == u.Username && a.Password == u.Password);
-if(person == null){
-     return BadRequest(new { key = "error", message = "User not found", errorCode = 400 });
-
-}
-
-return Ok(person);
-
-}
 
 
 
@@ -69,11 +38,11 @@ public async Task<IActionResult> PaymentHistory([FromBody] PaymentHistory p)
 
 
 
-    var pay = new PaymentHistory
+    var pay = new DpGlyde
     {
-        InstituitionName = p.InstituitionName,
-        ShortName = p.ShortName,
-        Country = p.Country,
+        Recipient = p.InstituitionName,
+        InstCode = p.ShortName,
+        CountryCode = p.Country,
         Currency = p.Currency,
         InstituitionType = p.InstituitionType,
         CompanyEmail = p.CompanyEmail,
@@ -81,20 +50,21 @@ public async Task<IActionResult> PaymentHistory([FromBody] PaymentHistory p)
         Branches = p.Branches,
         Users = p.Users,
         DatabaseSize = p.DatabaseSize,
-        BillingType = p.BillingType,
+        TransType = p.BillingType,
         AmountPaid = p.AmountPaid,
         PaymentDate = DateTime.Now,
         StartDate = p.StartDate.Value,
-        EndDate = p.EndDate.Value
+        EndDate = p.EndDate.Value,
+        Narration = "Subscribe"
     };
 
     try
     {
-        context.PaymentHis.Add(pay);
+        context.DpGlydes.Add(pay);
         await context.SaveChangesAsync();
         await AddToBillTable(
-            pay.InstituitionName,
-            pay.ShortName,
+            pay.Recipient,
+            pay.InstCode,
             pay.StartDate.Value,
             pay.EndDate.Value,
             pay.CompanyEmail
@@ -105,7 +75,7 @@ public async Task<IActionResult> PaymentHistory([FromBody] PaymentHistory p)
         return BadRequest(e);
     }
 var final = new {
-    message = $"{pay.InstituitionName} payment transaction added successfully"
+    message = $"{pay.Recipient} payment transaction added successfully"
 };
     return Ok(final);
 }
@@ -113,7 +83,7 @@ var final = new {
 
 [HttpGet("GetPaymentHis")]
 public async Task<IActionResult> GetPaymentHis(string ShortName){
-var s = context.PaymentHis.Where(a=>a.ShortName == ShortName).ToList();
+var s = context.DpGlydes.Where(a=>a.InstCode == ShortName && a.Narration=="Subscribe").ToList();
 if (s==null){
     return BadRequest(new { key = "error", message = "No payment history found", errorCode = 400 });
 }

@@ -271,3 +271,7 @@
 /Users/glydetek/Desktop/WIP/FlexiBiller/Flexi_Billler_Back/bin/Debug/net8.0/Flexi_Biller_Back.pdb
 /Users/glydetek/Desktop/WIP/FlexiBiller/Flexi_Billler_Back/obj/Debug/net8.0/Flexi_Biller_Back.genruntimeconfig.cache
 /Users/glydetek/Desktop/WIP/FlexiBiller/Flexi_Billler_Back/obj/Debug/net8.0/ref/Flexi_Biller_Back.dll
+/Users/glydetek/Desktop/WIP/FlexiBiller/Flexi_Billler_Back/bin/Debug/net8.0/Microsoft.AspNetCore.JsonPatch.dll
+/Users/glydetek/Desktop/WIP/FlexiBiller/Flexi_Billler_Back/bin/Debug/net8.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/Users/glydetek/Desktop/WIP/FlexiBiller/Flexi_Billler_Back/bin/Debug/net8.0/Newtonsoft.Json.dll
+/Users/glydetek/Desktop/WIP/FlexiBiller/Flexi_Billler_Back/bin/Debug/net8.0/Newtonsoft.Json.Bson.dll
