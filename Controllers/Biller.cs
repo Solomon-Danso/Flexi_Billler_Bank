@@ -59,6 +59,14 @@ public async Task<IActionResult> PaymentHistory([FromForm] PaymentHistory p)
         return BadRequest("StartDate and EndDate are required.");
     }
 
+    if (p.ShortName==null || p.InstituitionName==null || p.CompanyEmail==null)
+    {
+        return BadRequest("Shortname,Instituition Name and Company Email are required.");
+    }
+
+
+
+
     var pay = new PaymentHistory
     {
         InstituitionName = p.InstituitionName,
@@ -210,8 +218,8 @@ if(theDaysLeft<15 && s.IsInvoiceSent=="0"){
   // string endDate = s.EndDate?.ToString("dd MMMM, yyyy") ?? "N/A";
    DateTime endDate = s.EndDate.Value;
 
-      await SendInvoice(s.CompanyEmail, s.InstituitionName, endDate);
-s.IsInvoiceSent = "1";
+    await SendInvoice(s.CompanyEmail, s.InstituitionName, endDate);
+    s.IsInvoiceSent = "1";
  
 }
 
